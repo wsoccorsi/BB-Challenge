@@ -7,3 +7,5 @@
 5. Pagination
 
 All changes are fully tested in RSpec
+
+Please note, mimemagic dependecy was an issue in this implementation so I had to change to a newer gem
