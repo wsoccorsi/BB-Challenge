@@ -1,6 +1,12 @@
-<a href="<%= url_for(dog) %>">
-  <article>
-    <h2 class="dog-name"><%= dog.name %></h2>
-    <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}" %>
-  </article>
-</a>
+<% if render_advertisement(dog_counter) %>
+  <%= render partial: 'advertisement' %>
+<% end %>
+
+<div class="dog-container">
+  <a href="<%= url_for(dog) %>">
+    <article>
+      <h2 class="dog-name"><%= dog.name %></h2>
+      <%= image_tag url_for(dog.images.first), class: "dog-photo", alt: "Photo of #{dog.name}" %>
+    </article>
+  </a>
+</div>

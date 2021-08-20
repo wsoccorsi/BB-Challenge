@@ -18,4 +18,17 @@ header {
   align-items: center;
   display: flex;
   justify-content: space-between;
+
+  padding: 20px;
+  background-color: white;
+}
+
+body {
+  background-color: #ADD8E6;
+}
+
+.dogs-navigation {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }

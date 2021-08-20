@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :dog do
+    # Defining association
+    user { nil }
     sequence :name do |n|
       "Good Pup #{n}"
     end

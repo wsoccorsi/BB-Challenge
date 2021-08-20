@@ -1,10 +1,11 @@
 class DogsController < ApplicationController
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_owner, only: [:edit, :update, :destroy]
 
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all
+    @dogs = Dog.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /dogs/1
@@ -24,12 +25,15 @@ class DogsController < ApplicationController
   # POST /dogs
   # POST /dogs.json
   def create
-    @dog = Dog.new(dog_params)
-
+    @dog = current_user.dogs.create(dog_params)
     respond_to do |format|
       if @dog.save
-        @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
-
+        if params[:dog][:images].present?
+          params[:dog][:images].each do |image|
+            @dog.images.attach(image)
+          end
+        end
+        
         format.html { redirect_to @dog, notice: 'Dog was successfully created.' }
         format.json { render :show, status: :created, location: @dog }
       else
@@ -44,7 +48,15 @@ class DogsController < ApplicationController
   def update
     respond_to do |format|
       if @dog.update(dog_params)
-        @dog.images.attach(params[:dog][:image]) if params[:dog][:image].present?
+        # Removing images, TODO, incorporate a way to selectively
+        # remove images in UI
+        @dog.images.purge
+
+        if params[:dog][:images].present?
+          params[:dog][:images].each do |image|
+            @dog.images.attach(image)
+          end
+        end
 
         format.html { redirect_to @dog, notice: 'Dog was successfully updated.' }
         format.json { render :show, status: :ok, location: @dog }
@@ -66,6 +78,11 @@ class DogsController < ApplicationController
   end
 
   private
+    def authorize_owner
+        return unless @dog.user_id != current_user.id
+        redirect_to root_path, alert: 'Owners only!'
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_dog
       @dog = Dog.find(params[:id])

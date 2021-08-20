@@ -1,1 +1,4 @@
 <%= render partial: 'thumbnail', collection: @dogs, as: :dog %>
+<div class="dogs-navigation">
+  <%= will_paginate @dogs %>
+</div>
