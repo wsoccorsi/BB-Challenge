@@ -1,0 +1,14 @@
+.dogs-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input {
+  padding: 10px
+}
+
+.string, .text, .file {
+  margin-right: 10px
+}

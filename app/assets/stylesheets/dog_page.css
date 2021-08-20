@@ -1,0 +1,15 @@
+.dog-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dog-name {
+  text-align: center;
+}
+
+.dog-photo {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+}
