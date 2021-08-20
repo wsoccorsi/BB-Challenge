@@ -8,4 +8,4 @@
 
 All changes are fully tested in RSpec
 
-Please note, mimemagic dependecy was an issue in this implementation so I had to change to a newer gem
+Please note, mimemagic dependecy was an issue in this implementation so I had to change to a newer gem. I did not complete any front end challenges either, just added some flexbox to make it more readable.
